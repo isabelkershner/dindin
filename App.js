@@ -4,14 +4,22 @@ import { Constants } from 'expo';
 
 // You can import from local files
 import AssetExample from './components/AssetExample';
+import SplashScreen from './components/SplashScreen'
 
 // or any pure javascript modules available in npm
 import { Card } from 'react-native-paper';
+//import SplashScreen from './components/SplashScreen';
 
 export default class App extends React.Component {
   render() {
     return (
+      <View>
+        <SplashScreen></SplashScreen>
+      </View>
+    )
+    /*return (
       <View style={styles.container}>
+        
         <Text style={styles.paragraph}>
           Change code in the editor and watch it change on your phone! Save to get a shareable url.
         </Text>
@@ -19,11 +27,11 @@ export default class App extends React.Component {
           <AssetExample />
         </Card>
       </View>
-    );
+    );*/
   }
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -37,4 +45,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-});
+});*/
