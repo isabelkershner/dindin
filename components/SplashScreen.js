@@ -1,39 +1,40 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
-import { Constants } from 'expo';
+import { Text, View, StyleSheet, Image, Button } from 'react-native';
 
+/* Ask about resizing for different screens, how to use sketch, and button
+*/
 
 export default class SplashScreen extends React.Component {
-    render() {
-      return (
-        
-        <View style={styles.container}>
-          <Image style={styles.imageContainer} source={require('../assets/people.png')}>
-            </Image>
-         
-          
-        </View>
-      );
-    }
+  render() {
+    return (
+      <View style={styles.container}>
+        <Image style={styles.logo} source={require('../assets/people.png')} />
+        <Text style={styles.welcome}> DinDin </Text>
+        <Text style={styles.description}> connecting food lovers</Text>
+        <Button style = {styles.button} title="Get Started"/>
+      </View>
+    );
   }
-  const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        alignItems: 'stretch',
-      /*flex: 1,
-      justifyContent: 'center',
-      backgroundColor: 'white',
-      alignItems: 'center',*/
+}
 
-    },
-    imageContainer:{
-        //height: 200,
-        flex:1,
-        /*width: undefined, 
-        height: undefined,
-        alignSelf: 'stretch',*/
-        //flexDirection: 'column',
-        //justifyContent: 'center',
-    },
-  });
-  
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 24,
+  },
+  logo: {
+    height: 250,
+    width: 250,
+  },
+  welcome:{
+    fontFamily: 'Arial'
+  },
+  description:{
+    fontFamily: 'Snell Roundhand'
+  },
+  button:{
+    color:'blue',
+  }
+});
