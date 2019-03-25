@@ -8,15 +8,6 @@ import Button from 'Button';
 export default class SplashScreen extends React.Component {
   constructor(props){
     super(props)
-    this.imageTop1 = new Animated.Value(0);
-    this.imageLeft1 = new Animated.Value(0);
-
-    this.imageTop2 = new Animated.Value(0);
-    this.imageLeft2 = new Animated.Value(0);
-
-    this.imageTop3 = new Animated.Value(0);
-    this.imageLeft3 = new Animated.Value(0);
-
     this.state = {
       fadeAmin1: new Animated.Value(0),
       fadeAmin2: new Animated.Value(1),
@@ -28,7 +19,6 @@ export default class SplashScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.animate();
 
 
     Animated.loop(
@@ -85,70 +75,6 @@ export default class SplashScreen extends React.Component {
     {iterations: -1}
     ).start()
   }
-  animate () {
-
-    //this.imageTop1.setValue(0)
-    this.imageLeft1.setValue(0)
-    this.imageTop2.setValue(1)
-    //this.imageLeft2.setValue(1)
-    //this.imageTop3.setValue(1)
-    this.imageLeft3.setValue(0)
-    
-    /*Animated.parallel([
-      Animated.timing(
-        this.imageTop1,
-        {
-          toValue: 1,
-          duration: 2000,
-          //easing: Easing.linear
-        }
-      ),
-      Animated.timing(
-        this.imageLeft1,
-        {
-          toValue: 1,
-          duration: 2000,
-          //easing: Easing.linear
-        }
-      ),
-      Animated.timing(
-        this.imageTop2,
-        {
-          toValue: 0,
-          duration: 2000,
-          easing: Easing.linear,
-
-        }
-      ),
-      Animated.timing(
-        this.imageLeft2,
-        {
-          toValue: 0,
-          duration: 2000,
-        easing: Easing.linear,
-
-        }
-      ),
-      Animated.timing(
-        this.imageTop3,
-        {
-          toValue: 0,
-          duration: 2000,
-          easing: Easing.linear,
-
-        }
-      ),
-      Animated.timing(
-        this.imageLeft3,
-        {
-          toValue: 1,
-          duration: 2000,
-          easing: Easing.linear,
-
-        }
-      ),
-    ]).start(() => this.animate())*/
-}
 
   highlight() {
     Actions.home();
@@ -162,31 +88,6 @@ export default class SplashScreen extends React.Component {
   render() {
     let { fadeAmin1, fadeAmin2, fadeAmin3 } = this.state;
     
-    /*const top1 = this.imageTop1.interpolate({
-      inputRange: [0, 1],
-      outputRange: [this.state.screenHeight/3, this.state.screenHeight/2]
-    });
-    const left1 = this.imageLeft1.interpolate({
-      inputRange: [0, 1],
-      outputRange: [this.state.screenWidth/1.8, this.state.screenWidth/1.2]
-    });
-    const top2 = this.imageTop2.interpolate({
-      inputRange: [0, 1],
-      outputRange: [50, this.state.screenHeight/4]
-    });
-    const left2 = this.imageLeft2.interpolate({
-      inputRange: [0, 1],
-      outputRange: [50, this.state.screenWidth/4]
-    });
-
-    const top3 = this.imageTop3.interpolate({
-      inputRange: [0, 1],
-      outputRange: [50, this.state.screenHeight/3.9]
-    });
-    const left3 = this.imageLeft3.interpolate({
-      inputRange: [0, 1],
-      outputRange: [this.state.screenWidth/1.8, this.state.screenWidth/1.2]
-    });*/
 
     return (
 
@@ -212,6 +113,8 @@ export default class SplashScreen extends React.Component {
             </View>
           </View>
         </View>
+        <Text style={{paddingTop: 76.09,fontFamily: 'Helvetica', fontSize: 29, color: '#353535', textAlign: 'center'}}>DinDin</Text>
+        <Text style={{fontFamily: 'Helvetica', fontSize:14, color:'#000000',textAlign: 'center'}}>Connecting food</Text>
         <TouchableHighlight
           onPress={this.highlight.bind(this)}
           underlayColor={'rgb(100,184,248)'}
