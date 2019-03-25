@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   logo: {
-    height: 250,
-    width: 250,
+    height: 258.11,
+    width: 258.11,
+    resizeMode: 'contain',
   },
   welcome:{
     fontFamily: 'Arial'
