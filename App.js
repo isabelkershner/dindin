@@ -4,15 +4,32 @@ import { Constants } from 'expo';
 
 // You can import from local files
 import SplashScreen from './components/SplashScreen';
+import HomeScreen from './components/HomeScreen'
 
 // or any pure javascript modules available in npm
 import { Card } from 'react-native-paper';
+import {createStackNavigator, createAppContainer} from 'react-navigation';
+
+const mainNavigator = createStackNavigator(
+  {
+    Splash: SplashScreen,
+    Home: HomeScreen,
+  },
+  {
+    initialRouteName: 'Splash',
+
+  }
+)
+
+const AppContainer = createAppContainer(mainNavigator)
+
+
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-          <SplashScreen />
+          <AppContainer/>
       </View>
     );
   }
@@ -27,3 +44,4 @@ const styles = StyleSheet.create({
     padding: 8,
   },
 });
+
