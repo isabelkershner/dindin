@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text,Alert, View, StyleSheet, Dimensions, Image,TouchableHighlight,Animated,Easing } from 'react-native';
-import Button from 'Button';
+//import Button from 'Button';
 
 /* Ask about resizing for different screens, how to use sketch, and button
 */
@@ -93,7 +93,7 @@ export default class SplashScreen extends React.Component {
 
       <View style={styles.container}>
         <Animated.Image
-          style={{opacity: fadeAmin1, position: 'absolute', top: this.state.screenHeight/1.7, left: this.state.screenWidth/1.8,}}
+          style={{opacity: fadeAmin1, position: 'absolute', top: this.state.screenHeight/2, left: this.state.screenWidth/1.8,}}
           source={require('../assets/hippygirl.png')}
         />
         <Animated.Image
@@ -116,7 +116,10 @@ export default class SplashScreen extends React.Component {
         <Text style={{paddingTop: 76.09,fontFamily: 'Helvetica', fontSize: 29, color: '#353535', textAlign: 'center'}}>DinDin</Text>
         <Text style={{fontFamily: 'Helvetica', fontSize:14, color:'#000000',textAlign: 'center'}}>Connecting food</Text>
         <TouchableHighlight
-          onPress={this.highlight.bind(this)}
+          onPress={ () => {
+            this.props.navigation.navigate('Home')
+            this.highlight.bind(this)}
+          }
           underlayColor={'rgb(100,184,248)'}
           style={{backgroundColor: 'rgb(15,140,255)',position: 'absolute', bottom:0, width: '100%' }}>
           <Text style={{fontSize: 24, textAlign: 'center', color: 'white'}}>Get Started</Text>
@@ -155,7 +158,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF'
   },
   button:{
-    fontFamily: 'AppleSystemUIFont',
+    fontFamily: 'Helvetica',
     fontSize: 14,
     color: 'black',
     letterSpacing: 0,
