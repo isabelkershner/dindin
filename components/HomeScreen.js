@@ -26,7 +26,11 @@ class HomeScreen extends Component {
           <TouchableOpacity>
             <Text>Decline</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+          onPress={ () => {
+            this.props.navigation.navigate('Maps')
+             }
+          }>
             <Text>Accept</Text>
           </TouchableOpacity>
         </View>
