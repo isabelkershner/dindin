@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Text,Alert, View, StyleSheet, Dimensions, Image,TouchableHighlight,Animated,Easing } from 'react-native';
+import LoginScreen from './elements/FBLoginScreen'
 //import Button from 'Button';
 
 /* Ask about resizing for different screens, how to use sketch, and button
@@ -129,7 +130,7 @@ export default class SplashScreen extends React.Component {
   }
 }
 
-
+// To get the loginText for facebook just add <LoginScreen/> ....isssue : mesess with the Animation... not sure if it even goes here
 const styles = StyleSheet.create({
   container: {
     flex:1,

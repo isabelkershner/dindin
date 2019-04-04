@@ -4,7 +4,8 @@ import { Constants } from 'expo';
 
 // You can import from local files
 import SplashScreen from './components/SplashScreen';
-import HomeScreen from './components/HomeScreen'
+import HomeScreen from './components/HomeScreen';
+import MapComponent from './components/MapComponent';
 
 // or any pure javascript modules available in npm
 import { Card } from 'react-native-paper';
@@ -14,6 +15,7 @@ const mainNavigator = createStackNavigator(
   {
     Splash: SplashScreen,
     Home: HomeScreen,
+    Maps: MapComponent,
   },
   {
     initialRouteName: 'Splash',
