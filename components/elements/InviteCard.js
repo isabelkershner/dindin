@@ -23,13 +23,16 @@ const Card = (props) => {
         <TouchableOpacity style={{height:51}}>
           <Text style={{color:'red'}}>Decline</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{height:51}}
+        <TouchableOpacity style={{height:51}}>
+          <Text style={{color:'green'}}>Accept</Text>
+        </TouchableOpacity>
+        {/* <TouchableOpacity style={{height:51}}
           onPress={() => {
             props.navigation.navigate('Maps')
           }
           }>
           <Text style={{color:'green'}}>Accept</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -57,12 +60,14 @@ const styles = {
     flex: 1,
     flexDirection: 'row',
     height: 150,
+    paddingBottom: 36,
   },
   buttonContainer: {
     flex: 1,
     flexDirection: 'row',
     height: 51,
-    justifyContent: 'center',
+    //justifyContent: 'center',
+    //paddingTop:20,
   },
   nameText: {
     fontSize: 14,

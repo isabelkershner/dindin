@@ -40,8 +40,8 @@ class HomeScreen extends Component {
   render() {
 
     return (
-      <ScrollView>
-        <Text>Hello HomeScreen</Text>
+      <ScrollView horizontal>
+        {/* <Text>Hello HomeScreen</Text> */}
         {this.state.invitations.map((v, i) => (
           <InviteCard key={i} picture={v.Picture} name={v.Name} date={v.Date} />
         ))}
