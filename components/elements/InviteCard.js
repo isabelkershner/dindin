@@ -1,10 +1,32 @@
 import React from 'react';
 import { View } from 'react-native';
+import firebase from 'firebase';
+//import firebaseConfig from './firebase'
+
 
 const Card = (props) => {
   return (
     <View style={styles.containerStyle}>
       {props.children}
+      <View style={styles.topContainer}>
+          <Image source={dude}/>
+          <View>
+            <Text style={styles.nameText}>Name</Text>
+            <Text style={styles.dateText}>Date</Text>
+          </View>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity>
+            <Text>Decline</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+          onPress={ () => {
+            props.navigation.navigate('Maps')
+             }
+          }>
+            <Text>Accept</Text>
+          </TouchableOpacity>
+        </View>
     </View>
   );
 };
@@ -24,6 +46,23 @@ const styles = {
     marginLeft: 5,
     marginRight: 5,
     marginTop: 10,
+  },
+  topContainer:{
+    flex:1,
+    flexDirection:'row',
+    height: 150,
+  },
+  buttonContainer:{
+    flex:1,
+    flexDirection:'row',
+    height:150,
+  },
+  nameText:{
+    fontSize:14,
+  },
+  dateText:{
+    fontSize:14,
+    opacity:.5,
   }
 };
 
