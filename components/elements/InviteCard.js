@@ -1,18 +1,23 @@
 import React from 'react';
-import { View } from 'react-native';
+//import Component from 'react';
 import firebase from 'firebase';
 //import firebaseConfig from './firebase'
+import { Text, Image, TouchableOpacity,StyleSheet,View } from 'react-native';
+import dude from '../../assets/dude.png'
+
 
 
 const Card = (props) => {
   return (
     <View style={styles.containerStyle}>
-      {props.children}
+      {/* {props.children} */}
       <View style={styles.topContainer}>
           <Image source={dude}/>
           <View>
-            <Text style={styles.nameText}>Name</Text>
-            <Text style={styles.dateText}>Date</Text>
+            <Text style={styles.nameText}>Name: {props.name}</Text>
+            
+            <Text style={styles.dateText}>Date:{props.date}</Text>
+            
           </View>
         </View>
         <View style={styles.buttonContainer}>
