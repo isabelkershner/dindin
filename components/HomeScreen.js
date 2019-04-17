@@ -1,36 +1,80 @@
-import React,{Component} from 'react';
-import { Text, Image, TouchableOpacity,StyleSheet,View } from 'react-native';
-//import firebase from 'firebase';
+import React, { Component } from 'react';
+import { Easing,Text, Image, Animated,TouchableOpacity, StyleSheet, View, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import InviteSection from './elements/InviteSection';
 import InviteCard from './elements/InviteCard';
+import AddEvent from './elements/AddEvent';
+import Event from './elements/Event';
 import Button from './Button'
 import firebaseConfig from './firebase'
-import firebase from 'firebase'  
-//import console = require('console');
+import firebase from 'firebase'
+
 
 
 class HomeScreen extends Component {
 
   constructor(props) {
     super(props)
+    this.animatedValue = new Animated.Value(0)
+    this.declineInvitation = this.declineInvitation.bind(this)
     this.state = { 
-      invitations: []
+      invitations: [],
+      accepted:[],
     }
   }
 
   //Gets information from the database
-  async startListener(path){
-    let context=this
-    firebase.database().ref(path).on('value',async(snapshot)=>{
+  async startListener(path) {
+    let context = this
+    firebase.database().ref(path).on('value', async (snapshot) => {
       await context.setState({
         eventsList: JSON.parse(JSON.stringify(snapshot.val()))
       })
     })
   }
-  
 
-  componentDidMount(){
+  /*
+  Need to fix: generating uniqe Ids so that I can find where the invitation is and then delete it
+  */
+  declineInvitation = (id) =>{
+    this.animate()
+
+    console.log("before",this.state.invitations)
+    //let index = this.state.invitations.indexOf(id)
+    //console.log("indexval:",index)
+    this.state.invitations.splice(id-1,1)
+    console.log("after",this.state.invitations)
+    this.setState({invitations:this.state.invitations})
+      //console.log(this.state.invitations.length)
+    console.log('deleted')
+    console.log('new size',this.state.invitations.length)
+  }
+
+  animate () {
+    this.animatedValue.setValue(0)
+    Animated.timing(
+      this.animatedValue,
+      {
+        toValue: 1,
+        duration: 3000,
+        easing: Easing.linear
+      }
+    ).start(() => this.animate())
+    }
+  acceptInvitation = (id) =>{
+    console.log("Before accepted",this.state.accepted)
+    this.state.accepted.push(this.state.invitations[id-1])
+    console.log("after accepted",this.state.accepted)
+    this.state.invitations.splice(id-1,1)
+    this.setState({accepted:this.state.accepted,invitations:this.state.invitations})
+    
+    //console.log(this.state.invitations.length)
+  }
+
+
+
+  componentDidMount() {
+    
     firebase.database().ref('Invitations').on('value', snapshot => {
       const data = snapshot.val()
       const i = Object.values(data)
@@ -38,98 +82,35 @@ class HomeScreen extends Component {
         invitations: i
       })
     })
+    
   }
-  //state = { email: '', password: '', error: '', loading: false };
-
-  // componentWillMount(){
-  //   firebase.database().ref('Invitations').on('value',snapshot=>{
-
-  //     console.log("efsfjlkefj",snapshot.Name)
-  //     console.log("yyyy")
-  //     let data = snapshot.val()
-  //     console.log("xxxx",data.Name)
-  //     //let invitationArray = Object.values(data);
-  //     this.setState({
-  //       invitations: data
-  //     })
-  //     console.log(data)
-  //   })
-    
-  // }
-      // //My version
-      // getInvitations(){
-      //   var events = [];
-      //   firebase.database().ref().on('value', snapshot=> {
-      //     let data = snapshot.val()
-          
-      //     data.forEach((u,key)=>{
-      //           events.push(u)    //holds each JSON object that represents a pending invite
-      //     })
-          
-
-      //   });
-      // }
-
-  // getInvitations()  {	
-  //   firebase.database().ref('Invitations').on('value',snapshot=>{
-  //     console.log("aaaaa",snapshot)
-  //     console.log("efsfjlkefj",snapshot.Name)
-  //     console.log("yyyy")
-  //     let data = snapshot.val()
-  //     console.log("xxxx",data.Name)
-  //     let invitationArray = Object.values(data);
-
-      // var myArray = [
-
-      // ]
-      // for (item in data) {
-      //   if (data.hasOwnProperty(item)){
-      //     myArray.push(data[item])
-      //   }
-      // }
-
-      
-      //   myArray.forEach(invitation => {
-      //     var value = JSON.parse(invitation)
-      //     console.log("Invitation:",value)
-      //     return (
-      //      <InviteCard name={value.Name} date = {value.Date}/>
-      //     ) 
-      //   })
-    
 
   render() {
-    
+
     return (
       <View>
-        <Text>Hello HomeScreen</Text>
-        {this.state.invitations.map((v, i) => (
-            <InviteCard name={v.Name} date={v.Date} />
-          ))}
-      </View>
-      
-         /* {
-        this.getInvitations()
-        } */
-      // </View>
-      // <View>
-      // {/* <InviteCard name={this.props.name} date={this.props.date}> */}
+      <Text>Pending({this.state.invitations.length})</Text>
+      {this.state.invitations.length!=0 ?
+      <ScrollView horizontal>
         
-      //    {/* <InviteSection>
-      //     <Button onPress={() => firebase.auth().signOut().then(() => Actions.login())}>
-      //       Log Out
-      //     </Button>
-      //   </InviteSection>  */}
-      // {/* </InviteCard> */}
-      // // </View>
-      // // </View>
+        {this.state.invitations.map((v, i) => ( 
+          <InviteCard id = {v.id} accept={()=>this.acceptInvitation(v.id)} decline={()=>this.declineInvitation(v.id)} key={i} picture={v.Picture} name={v.Name} date={v.Date} />
+        ))}
+      </ScrollView>:<View/>}
+      <ScrollView>
+        
+      {this.state.accepted.length !=0 ? this.state.accepted.map((v, i) => (
+          <Event key={i} picture={v.Picture} name={v.Name} date={v.Date} />
+        )) : <AddEvent/>}
+      </ScrollView>
+      </View>
     )
   }
 }
 
 // const styles=StyleSheet.create({
-  
-  
+
+
 // })
 
 export default HomeScreen;
