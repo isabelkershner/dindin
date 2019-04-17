@@ -6,19 +6,11 @@ import { Constants } from 'expo';
 import SplashScreen from './components/SplashScreen';
 import HomeScreen from './components/HomeScreen';
 import MapComponent from './components/MapComponent';
-<<<<<<< HEAD
-import FBLoginScreen from './components/elements/FBLoginScreen'
-import FBMainScreen from './components/elements/FBMainScreen'
 
-=======
-import firebase from 'firebase'
->>>>>>> 5feae77a457e4929a5119108faa06dcd6dc7cff2
 // or any pure javascript modules available in npm
 import { Card } from 'react-native-paper';
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 import LoginScreen from './components/elements/FBLoginScreen';
-import MainScreen from './components/elements/FBMainScreen';
-
 
 const mainNavigator = createStackNavigator(
   {
