@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text,Alert, View, StyleSheet, Dimensions, Image,TouchableHighlight,Animated,Easing } from 'react-native';
+import { Text, View, StyleSheet, Dimensions, Image,TouchableHighlight,Animated,Easing } from 'react-native';
 import LoginScreen from './elements/FBLoginScreen'
 import { WebBrowser,Facebook } from 'expo';
 import firebase from './firebase'
