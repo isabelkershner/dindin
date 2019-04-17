@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Text, Image, Animated,TouchableOpacity, StyleSheet, View, ScrollView } from 'react-native';
+import { Easing,Text, Image, Animated,TouchableOpacity, StyleSheet, View, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import InviteSection from './elements/InviteSection';
 import InviteCard from './elements/InviteCard';
+import AddEvent from './elements/AddEvent';
+import Event from './elements/Event';
 import Button from './Button'
 import firebaseConfig from './firebase'
 import firebase from 'firebase'
@@ -13,6 +15,7 @@ class HomeScreen extends Component {
 
   constructor(props) {
     super(props)
+    this.animatedValue = new Animated.Value(0)
     this.declineInvitation = this.declineInvitation.bind(this)
     this.state = { 
       invitations: [],
@@ -34,6 +37,8 @@ class HomeScreen extends Component {
   Need to fix: generating uniqe Ids so that I can find where the invitation is and then delete it
   */
   declineInvitation = (id) =>{
+    this.animate()
+
     console.log("before",this.state.invitations)
     //let index = this.state.invitations.indexOf(id)
     //console.log("indexval:",index)
@@ -45,6 +50,17 @@ class HomeScreen extends Component {
     console.log('new size',this.state.invitations.length)
   }
 
+  animate () {
+    this.animatedValue.setValue(0)
+    Animated.timing(
+      this.animatedValue,
+      {
+        toValue: 1,
+        duration: 3000,
+        easing: Easing.linear
+      }
+    ).start(() => this.animate())
+    }
   acceptInvitation = (id) =>{
     console.log("Before accepted",this.state.accepted)
     this.state.accepted.push(this.state.invitations[id-1])
@@ -58,6 +74,7 @@ class HomeScreen extends Component {
 
 
   componentDidMount() {
+    
     firebase.database().ref('Invitations').on('value', snapshot => {
       const data = snapshot.val()
       const i = Object.values(data)
@@ -73,16 +90,18 @@ class HomeScreen extends Component {
     return (
       <View>
       <Text>Pending({this.state.invitations.length})</Text>
+      {this.state.invitations.length!=0 ?
       <ScrollView horizontal>
         
         {this.state.invitations.map((v, i) => ( 
           <InviteCard id = {v.id} accept={()=>this.acceptInvitation(v.id)} decline={()=>this.declineInvitation(v.id)} key={i} picture={v.Picture} name={v.Name} date={v.Date} />
         ))}
-      </ScrollView>
+      </ScrollView>:<View/>}
       <ScrollView>
-      {this.state.accepted.map((v, i) => (
-          <InviteCard id = {v.id} accept={()=>this.acceptInvitation(v.id)} decline={()=>this.declineInvitation(v.id)} key={i} picture={v.Picture} name={v.Name} date={v.Date} />
-        ))}
+        
+      {this.state.accepted.length !=0 ? this.state.accepted.map((v, i) => (
+          <Event key={i} picture={v.Picture} name={v.Name} date={v.Date} />
+        )) : <AddEvent/>}
       </ScrollView>
       </View>
     )

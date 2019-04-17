@@ -25,12 +25,12 @@ const Card = (props) => {
         </View>
       </View>
       <View style={styles.buttonContainer}> 
-        <TouchableOpacity style={{height:51}} onPress ={()=>{
+        <TouchableOpacity style={{height:51,alignItems:'stretch'}} onPress ={()=>{
           props.decline(props)
         }}>
           <Text style={{color:'red'}}>Decline</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{height:51}} onPress ={()=>{
+        <TouchableOpacity style={{height:51,alignItems:'stretch'}} onPress ={()=>{
           props.accept(props)
         }}>
           <Text style={{color:'green'}}>Accept</Text>
