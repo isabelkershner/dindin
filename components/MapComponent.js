@@ -50,11 +50,11 @@ export default class MapComponent extends React.Component {
                 >
                     <MapView.Marker
                         coordinate={{
-                            latitude: 38.025475,
-                            longitude: -78.521713
+                            latitude: this.state.userLocation.coords.latitude,
+                            longitude: this.state.userLocation.coords.longitude,
                 }
                 }
-                title="wtf is this"
+                title="Map"
                 description="Location"
             />
                 </MapView>
