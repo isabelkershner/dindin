@@ -30,7 +30,7 @@ export default class LoginScreen extends React.Component {
           console.log(credential)
 
           firebase.auth().signInAndRetrieveDataWithCredential(credential).catch((error) => {
-            console.log("FUCKKK!!!!!")
+          
             console.log(error)
           })
           //.then to addd 

@@ -6,17 +6,17 @@ import { Constants } from 'expo';
 import SplashScreen from './components/SplashScreen';
 import HomeScreen from './components/HomeScreen';
 import MapComponent from './components/MapComponent';
-
+import FinalMap from './components/FinalMap';
 // or any pure javascript modules available in npm
 import { Card } from 'react-native-paper';
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 import LoginScreen from './components/elements/FBLoginScreen';
+//import Directions from './components/Directions'
 
 const mainNavigator = createStackNavigator(
   {
     Splash: SplashScreen,
     Login: LoginScreen,
-    
     Home: HomeScreen,
     Maps: MapComponent,
   },
