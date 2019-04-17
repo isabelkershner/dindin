@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Easing,Text, Image, Animated,TouchableOpacity, StyleSheet, View, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import InviteSection from './elements/InviteSection';
 import InviteCard from './elements/InviteCard';
 import AddEvent from './elements/AddEvent';
 import Event from './elements/Event';
@@ -37,12 +36,28 @@ class HomeScreen extends Component {
   Need to fix: generating uniqe Ids so that I can find where the invitation is and then delete it
   */
   declineInvitation = (id) =>{
+<<<<<<< HEAD
+    let i;
+    
+    for (i=0;i<this.state.invitations.length;i++){
+      if (this.state.invitations[i].id == id){
+        this.state.invitations.splice(i,1)
+      }
+    }
+    
+    this.animate()
+    console.log("before",this.state.invitations)
+    //let index = this.state.invitations.indexOf(id)
+    //console.log("indexval:",index)
+    //this.state.invitations.splice(id-1,1)
+=======
     this.animate()
 
     console.log("before",this.state.invitations)
     //let index = this.state.invitations.indexOf(id)
     //console.log("indexval:",index)
     this.state.invitations.splice(id-1,1)
+>>>>>>> e4c10eca4f7d4b6f09440e623ca5f9e1455323c2
     console.log("after",this.state.invitations)
     this.setState({invitations:this.state.invitations})
       //console.log(this.state.invitations.length)
@@ -62,10 +77,25 @@ class HomeScreen extends Component {
     ).start(() => this.animate())
     }
   acceptInvitation = (id) =>{
+<<<<<<< HEAD
+    let i;
+    
+    for (i=0;i<this.state.invitations.length;i++){
+      if (this.state.invitations[i].id == id){
+        this.state.accepted.push(this.state.invitations[i])
+        this.state.invitations.splice(i,1)
+      }
+    }
+    console.log("Before accepted",this.state.accepted)
+    //this.state.accepted.push(this.state.invitations[id-1])
+    console.log("after accepted",this.state.accepted)
+    //this.state.invitations.splice(id-1,1)
+=======
     console.log("Before accepted",this.state.accepted)
     this.state.accepted.push(this.state.invitations[id-1])
     console.log("after accepted",this.state.accepted)
     this.state.invitations.splice(id-1,1)
+>>>>>>> e4c10eca4f7d4b6f09440e623ca5f9e1455323c2
     this.setState({accepted:this.state.accepted,invitations:this.state.invitations})
     
     //console.log(this.state.invitations.length)
