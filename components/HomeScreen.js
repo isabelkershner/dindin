@@ -46,14 +46,9 @@ class HomeScreen extends Component {
     
     this.animate()
     console.log("before",this.state.invitations)
-    //let index = this.state.invitations.indexOf(id)
-    //console.log("indexval:",index)
-    //this.state.invitations.splice(id-1,1)
-    console.log("after",this.state.invitations)
+    
     this.setState({invitations:this.state.invitations})
-      //console.log(this.state.invitations.length)
-    console.log('deleted')
-    console.log('new size',this.state.invitations.length)
+     
   }
 
   animate () {
@@ -79,7 +74,7 @@ class HomeScreen extends Component {
    
     this.setState({accepted:this.state.accepted,invitations:this.state.invitations})
     
-    //console.log(this.state.invitations.length)
+   
   }
 
 
@@ -112,7 +107,7 @@ class HomeScreen extends Component {
         
       {this.state.accepted.length !=0 ? this.state.accepted.map((v, i) => (
           <Event key={i} picture={v.Picture} name={v.Name} date={v.Date} />
-        )) : <AddEvent/>}
+        )) : <AddEvent navigation = {this.props.navigation}/>}
       </ScrollView>
       </View>
     )

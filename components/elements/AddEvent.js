@@ -1,19 +1,27 @@
 import React,{Component} from 'react';
 import { Text, Image, View,TouchableOpacity } from 'react-native';
 import newevent from '../../assets/newevent.png'
+import App from '../../App'
 
 export default class AddEvent extends React.Component{
   
     render(){
     return (
       <View style={styles.containerStyle}>
-        <TouchableOpacity style={{justifyContent:'center'}}>
+        <TouchableOpacity style={{justifyContent:'center'}}
+        onPress={ () => {
+          this.props.navigation.navigate('createEvent')
+           }
+        }
+        >
          <Image style={{height:33,width:160,}} source={newevent}/>
         </TouchableOpacity>
       </View>
     );
   };
 }
+
+
 
   const styles = {
     containerStyle: {
