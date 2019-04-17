@@ -1,9 +1,10 @@
-import React from 'react';
+import React,{Component} from 'react';
 import { Text, Image, View,TouchableOpacity } from 'react-native';
 import newevent from '../../assets/newevent.png'
 
-const AddEvent = (props) => {
+export default class AddEvent extends React.Component{
   
+    render(){
     return (
       <View style={styles.containerStyle}>
         <TouchableOpacity style={{justifyContent:'center'}}>
@@ -12,6 +13,7 @@ const AddEvent = (props) => {
       </View>
     );
   };
+}
 
   const styles = {
     containerStyle: {
@@ -35,4 +37,4 @@ const AddEvent = (props) => {
     },
 }
 
-  export default AddEvent;
+  //export default AddEvent;

@@ -1,37 +1,49 @@
-import React from 'react';
-import { Text, Image, TouchableOpacity, StyleSheet, View } from 'react-native';
+import React, {Component} from 'react';
+import { Text, Image, TouchableHighlight,TouchableOpacity, StyleSheet, View } from 'react-native';
 import dude from '../../assets/dude.png'
+import InvitationDetails from '../InvitationDetails'
 
 
 
-const Card = (props) => {
-  // removeCard(invite){
-
-  // }
+// const Card = (props) => {
+export default class Card extends Component{
+  constructor(props){
+    super(props)
+  }
+  
+  // {props.children}
+  render(){
   return (
+    
+    <TouchableOpacity name={this.props.name} date = {this.props.date} picture={this.props.picture} 
+      onPress ={()=>{
+      this.props.navigation.navigate('Details')
+      
+    }}>
     <View style={styles.containerStyle}>
-      {/* {props.children} */}
+      
+      
       <View style={styles.topContainer}>
-        {props.picture ? (
-          <Image style={styles.profileImg} source={{ uri: props.picture }} />
+        {this.props.picture ? (
+          <Image style={styles.profileImg} source={{ uri: this.props.picture }} />
         ) : (
             <Image source={dude} />
           )}
         <View>
-          <Text style={styles.nameText}>{props.name}</Text>
+          <Text style={styles.nameText}>{this.props.name}</Text>
 
-          <Text style={styles.dateText}>{props.date}</Text>
+          <Text style={styles.dateText}>{this.props.date}</Text>
 
         </View>
       </View>
       <View style={styles.buttonContainer}> 
         <TouchableOpacity style={{height:51,alignItems:'stretch'}} onPress ={()=>{
-          props.decline(props)
+          this.props.decline(this.props)
         }}>
           <Text style={{color:'red'}}>Decline</Text>
         </TouchableOpacity>
         <TouchableOpacity style={{height:51,alignItems:'stretch'}} onPress ={()=>{
-          props.accept(props)
+          this.props.accept(this.props)
         }}>
           <Text style={{color:'green'}}>Accept</Text>
         </TouchableOpacity>
@@ -43,9 +55,13 @@ const Card = (props) => {
           <Text style={{color:'green'}}>Accept</Text>
         </TouchableOpacity> */}
       </View>
+      
     </View>
+    </TouchableOpacity>
+    
   );
 };
+}
 
 const styles = {
   containerStyle: {
@@ -93,4 +109,4 @@ const styles = {
   },
 };
 
-export default Card;
+//export default Card;
