@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Image, TouchableOpacity, StyleSheet, View, ScrollView } from 'react-native';
+import { Text, Image, Animated,TouchableOpacity, StyleSheet, View, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import InviteSection from './elements/InviteSection';
 import InviteCard from './elements/InviteCard';
@@ -7,12 +7,16 @@ import Button from './Button'
 import firebaseConfig from './firebase'
 import firebase from 'firebase'
 
+
+
 class HomeScreen extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      invitations: []
+    this.declineInvitation = this.declineInvitation.bind(this)
+    this.state = { 
+      invitations: [],
+      accepted:[],
     }
   }
 
@@ -26,6 +30,32 @@ class HomeScreen extends Component {
     })
   }
 
+  /*
+  Need to fix: generating uniqe Ids so that I can find where the invitation is and then delete it
+  */
+  declineInvitation = (id) =>{
+    console.log("before",this.state.invitations)
+    //let index = this.state.invitations.indexOf(id)
+    //console.log("indexval:",index)
+    this.state.invitations.splice(id-1,1)
+    console.log("after",this.state.invitations)
+    this.setState({invitations:this.state.invitations})
+      //console.log(this.state.invitations.length)
+    console.log('deleted')
+    console.log('new size',this.state.invitations.length)
+  }
+
+  acceptInvitation = (id) =>{
+    console.log("Before accepted",this.state.accepted)
+    this.state.accepted.push(this.state.invitations[id-1])
+    console.log("after accepted",this.state.accepted)
+    this.state.invitations.splice(id-1,1)
+    this.setState({accepted:this.state.accepted,invitations:this.state.invitations})
+    
+    //console.log(this.state.invitations.length)
+  }
+
+
 
   componentDidMount() {
     firebase.database().ref('Invitations').on('value', snapshot => {
@@ -35,33 +65,26 @@ class HomeScreen extends Component {
         invitations: i
       })
     })
+    
   }
 
   render() {
 
     return (
+      <View>
+      <Text>Pending({this.state.invitations.length})</Text>
       <ScrollView horizontal>
-        {/* <Text>Hello HomeScreen</Text> */}
-        {this.state.invitations.map((v, i) => (
-          <InviteCard key={i} picture={v.Picture} name={v.Name} date={v.Date} />
+        
+        {this.state.invitations.map((v, i) => ( 
+          <InviteCard id = {v.id} accept={()=>this.acceptInvitation(v.id)} decline={()=>this.declineInvitation(v.id)} key={i} picture={v.Picture} name={v.Name} date={v.Date} />
         ))}
       </ScrollView>
-
-      /* {
-     this.getInvitations()
-     } */
-      // </View>
-      // <View>
-      // {/* <InviteCard name={this.props.name} date={this.props.date}> */}
-
-      //    {/* <InviteSection>
-      //     <Button onPress={() => firebase.auth().signOut().then(() => Actions.login())}>
-      //       Log Out
-      //     </Button>
-      //   </InviteSection>  */}
-      // {/* </InviteCard> */}
-      // // </View>
-      // // </View>
+      <ScrollView>
+      {this.state.accepted.map((v, i) => (
+          <InviteCard id = {v.id} accept={()=>this.acceptInvitation(v.id)} decline={()=>this.declineInvitation(v.id)} key={i} picture={v.Picture} name={v.Name} date={v.Date} />
+        ))}
+      </ScrollView>
+      </View>
     )
   }
 }

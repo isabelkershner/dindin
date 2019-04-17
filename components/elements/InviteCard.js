@@ -2,7 +2,12 @@ import React from 'react';
 import { Text, Image, TouchableOpacity, StyleSheet, View } from 'react-native';
 import dude from '../../assets/dude.png'
 
+
+
 const Card = (props) => {
+  // removeCard(invite){
+
+  // }
   return (
     <View style={styles.containerStyle}>
       {/* {props.children} */}
@@ -20,10 +25,14 @@ const Card = (props) => {
         </View>
       </View>
       <View style={styles.buttonContainer}> 
-        <TouchableOpacity style={{height:51}}>
+        <TouchableOpacity style={{height:51}} onPress ={()=>{
+          props.decline(props)
+        }}>
           <Text style={{color:'red'}}>Decline</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{height:51}}>
+        <TouchableOpacity style={{height:51}} onPress ={()=>{
+          props.accept(props)
+        }}>
           <Text style={{color:'green'}}>Accept</Text>
         </TouchableOpacity>
         {/* <TouchableOpacity style={{height:51}}
@@ -71,6 +80,7 @@ const styles = {
   },
   nameText: {
     fontSize: 14,
+    color:'black',
   },
   dateText: {
     fontSize: 14,
