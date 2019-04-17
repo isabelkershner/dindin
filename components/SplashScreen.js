@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { Text,Alert, View, StyleSheet, Dimensions, Image,TouchableHighlight,Animated,Easing } from 'react-native';
 import LoginScreen from './elements/FBLoginScreen'
+import { WebBrowser,Facebook } from 'expo';
+import firebase from './firebase'
+
+
+
 //import Button from 'Button';
 
 /* Ask about resizing for different screens, how to use sketch, and button
@@ -18,6 +23,50 @@ export default class SplashScreen extends React.Component {
       screenHeight: Dimensions.get("screen").height,
     }
   }
+  /*
+
+  state = {
+    userAuthenticated: false
+  };
+
+  async loginWithFacebook() {
+    const { type, token } = await Expo.Facebook.loginWithReadPermissionAsync('2797959537096594',{permissions:['public_profile'],});
+
+    if (type == 'success') {
+      const credential = firebase.auth.FacebookAuthProvider.credential(token)
+      firebase.auth().signInAndRetrieveDataWithCredential(credential).catch((error) => {
+        console.log(error)
+      })
+      const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large)`);
+      const userInformation = await response.json();
+      this.setState({userInfo});
+      const userName  = userInformation.userName;
+      const userProfilePicture = userInformation.picture.data.url;
+      const userIdentification =  userInformation.id
+      firebase.database().ref('Users').orderByChild('uid').equalTo(userIdentification).once("value", snapshot => {  
+        if (snapshot.exists()) {
+                const userData = snapshot.val();
+                console.log("Barry is not good at Smash!")
+        } else {
+            //if uid not existant in database, create new entry
+            firebase.database().ref('Users/' + userIdentification).set({
+                userIdentification,
+                userName,
+                userProfilePicture,
+            }).then((data) => {
+                //success callback
+                console.log('data ', data)
+            }).catch((error) => {
+                //error callback
+                console.log('error ', error)
+            })
+            }
+        });
+    this.props.navigation.navigate('Home')
+    }
+  }
+  */
+
 
   componentDidMount() {
 
@@ -116,15 +165,19 @@ export default class SplashScreen extends React.Component {
         </View>
         <Text style={{paddingTop: 76.09,fontFamily: 'Helvetica', fontSize: 29, color: '#353535', textAlign: 'center'}}>DinDin</Text>
         <Text style={{fontFamily: 'Helvetica', fontSize:14, color:'#000000',textAlign: 'center'}}>Connecting food</Text>
+
         <TouchableHighlight
           onPress={ () => {
-            this.props.navigation.navigate('Home')
-            this.highlight.bind(this)}
+            this.props.navigation.navigate('Login')
+            //this.loginWithFacebook()
+            this.highlight.bind(this)
+             }
           }
           underlayColor={'rgb(100,184,248)'}
           style={{backgroundColor: 'rgb(15,140,255)',position: 'absolute', bottom:0, width: '100%' }}>
           <Text style={{fontSize: 24, textAlign: 'center', color: 'white'}}>Get Started</Text>
         </TouchableHighlight>
+        
       </View>
     );
   }
