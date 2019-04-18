@@ -29,11 +29,13 @@ export default class FinalMap extends React.Component {
             userLocation: null,
 			coordinates: [
 				{
+					//Origin
 					latitude: 38.0316204,
-                    longitude: -78.5111235,
+          longitude: -78.5111235,
                     
 				},
 				{
+					//Destination
 					latitude: 37.771707,
 					longitude: -122.4053769,
 				},

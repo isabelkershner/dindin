@@ -14,6 +14,7 @@ import {createStackNavigator, createAppContainer} from 'react-navigation';
 import LoginScreen from './components/elements/FBLoginScreen';
 import newEvent from './components/newEvent';
 import Map2MickyD from './components/Map2MickyD';
+import myEventsP from './components/MyEventsP';
 
 //import Directions from './components/Directions'
 
@@ -26,6 +27,7 @@ const mainNavigator = createStackNavigator(
     Maps: MapComponent,
     Details:FinalMap,
     Direction2MD : Map2MickyD,
+    myEventsPage : myEventsP
     
   },
   {
