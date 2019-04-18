@@ -45,7 +45,8 @@ const styles = {
     marginLeft: 5,
     marginRight: 5,
     marginTop: 23,
-    height: 80,
+    height: 120,
+    backgroundColor:'white',
     
   },
   topContainer: {

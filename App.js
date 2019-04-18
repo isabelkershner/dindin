@@ -7,6 +7,7 @@ import SplashScreen from './components/SplashScreen';
 import HomeScreen from './components/HomeScreen';
 import MapComponent from './components/MapComponent';
 import FinalMap from './components/FinalMap';
+import DetailScreen from './components/DetailsScreen'
 // or any pure javascript modules available in npm
 import { Card } from 'react-native-paper';
 import {createStackNavigator, createAppContainer} from 'react-navigation';
@@ -24,6 +25,7 @@ const mainNavigator = createStackNavigator(
     Home: HomeScreen,
     createEvent :newEvent,
     Maps: MapComponent,
+    Details:FinalMap,
     Direction2MD : Map2MickyD,
     myEventsPage : myEventsP
     
