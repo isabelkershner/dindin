@@ -46,18 +46,11 @@ class HomeScreen extends Component {
     }
     
     this.animate()
-    console.log("before",this.state.invitations)
-<<<<<<< HEAD
-
-    console.log("after",this.state.invitations)
-    this.setState({invitations:this.state.invitations})
-    console.log('deleted')
-    console.log('new size',this.state.invitations.length)
-=======
+  
     
     this.setState({invitations:this.state.invitations})
      
->>>>>>> a55241eacbae27a7afd9a8ad7cc2b29a490c2291
+
   }
 
   animate () {
@@ -80,17 +73,10 @@ class HomeScreen extends Component {
         this.state.invitations.splice(i,1)
       }
     }
-<<<<<<< HEAD
-    console.log("Before accepted",this.state.accepted)
-    console.log("after accepted",this.state.accepted)
-    this.setState({accepted:this.state.accepted,invitations:this.state.invitations})
-    
-=======
    
     this.setState({accepted:this.state.accepted,invitations:this.state.invitations})
     
    
->>>>>>> a55241eacbae27a7afd9a8ad7cc2b29a490c2291
   }
 
 
