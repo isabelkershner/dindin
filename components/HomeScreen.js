@@ -4,7 +4,6 @@ import { Actions } from 'react-native-router-flux';
 import InviteCard from './elements/InviteCard';
 import AddEvent from './elements/AddEvent';
 import Event from './elements/Event';
-import Button from './Button'
 import firebaseConfig from './firebase'
 import firebase from 'firebase'
 
@@ -100,8 +99,12 @@ class HomeScreen extends Component {
       <ScrollView horizontal>
         
         {this.state.invitations.map((v, i) => ( 
-          <InviteCard navigation = {this.props.navigation} id = {v.id} accept={()=>this.acceptInvitation(v.id)} decline={()=>this.declineInvitation(v.id)} key={i} picture={v.Picture} name={v.Name} date={v.Date} />
+           
+          <InviteCard navigation = {this.props.navigation} 
+          id = {v.id} accept={()=>this.acceptInvitation(v.id)} 
+          decline={()=>this.declineInvitation(v.id)} key={i} picture={v.Picture} name={v.Name} date={v.Date} />
         ))}
+        
       </ScrollView>:<View/>}
       <ScrollView>
         

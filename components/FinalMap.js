@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { View, Text, Dimensions, StyleSheet, Alert, Platform } from 'react-native';
 import { Constants, MapView,Location, Permissions } from 'expo';
-
+import InvitationDetails from './InvitationDetails';
 // Using a local version here because we need it to import MapView from 'expo'
 import MapViewDirections from './MapViewDirections';
 
@@ -95,18 +95,25 @@ export default class FinalMap extends React.Component {
 
 	render() {
 	  
-	  if (Platform.OS === 'android') {
-      return (
-	      <View style={styles.container}>
-	        <Text>
-	          {"For some reason Android crashes here on Expo, so you'll have to test this with iOS … Sorry"}
-	        </Text>
-	      </View>
-      );
-	  }
-	  
+	//   if (Platform.OS === 'android') {
+    //   return (
+	//       <View style={styles.container}>
+	//         <Text>
+	//           {"For some reason Android crashes here on Expo, so you'll have to test this with iOS … Sorry"}
+	//         </Text>
+	//       </View>
+    //   );
+	//   }
+	const {navigation} = this.props
+	  const name = navigation.getParam('name')
+	  const date= navigation.getParam('date')
+	  const picture = navigation.getParam('picture')
+	//   const id = navigation.getParam('id')
+	//   accept = (id) => {navigation.getParam('accept')}
+	//   decline = (id) => {navigation.getParam('decline')}
 		return (
 		  <View style={styles.container}>
+		  	
   			<MapView
   				initialRegion={{
   					latitude: LATITUDE,
@@ -134,6 +141,14 @@ export default class FinalMap extends React.Component {
   					/>
   				)}
   			</MapView>
+			  
+			  <View>
+			  
+			  
+		  	<InvitationDetails name={name} date={date} picture={picture}/>
+			  
+			  
+			  </View>
 			</View>
 		);
 	}
@@ -142,9 +157,10 @@ export default class FinalMap extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
+	backgroundColor: '#ecf0f1',
+	resizeMode:'cover'
   },
 });

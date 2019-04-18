@@ -5,21 +5,22 @@ import InvitationDetails from '../InvitationDetails'
 
 
 
-// const Card = (props) => {
+
 export default class Card extends Component{
   constructor(props){
     super(props)
   }
   
-  // {props.children}
+  
   render(){
   return (
     
-    <TouchableOpacity name={this.props.name} date = {this.props.date} picture={this.props.picture} 
-      onPress ={()=>{
-      this.props.navigation.navigate('Details')
-      
-    }}>
+     <TouchableOpacity  
+       onPress ={()=>{
+       this.props.navigation.navigate('Details',{name:this.props.name, picture:this.props.picture,date:this.props.date,
+      })
+       
+     }}>
     <View style={styles.containerStyle}>
       
       
@@ -47,13 +48,6 @@ export default class Card extends Component{
         }}>
           <Text style={{color:'green'}}>Accept</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity style={{height:51}}
-          onPress={() => {
-            props.navigation.navigate('Maps')
-          }
-          }>
-          <Text style={{color:'green'}}>Accept</Text>
-        </TouchableOpacity> */}
       </View>
       
     </View>
@@ -80,6 +74,7 @@ const styles = {
     marginTop: 10,
     height: 133,
     width: 315,
+    backgroundColor:'#FFFFFF'
   },
   topContainer: {
     flex: 1,
@@ -91,8 +86,6 @@ const styles = {
     flex: 1,
     flexDirection: 'row',
     height: 51,
-    //justifyContent: 'center',
-    //paddingTop:20,
   },
   nameText: {
     fontSize: 14,
@@ -109,4 +102,3 @@ const styles = {
   },
 };
 
-//export default Card;
