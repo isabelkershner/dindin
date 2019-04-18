@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Easing,Text, Image, Animated,TouchableOpacity, StyleSheet, View, ScrollView } from 'react-native';
+import { Easing,Text, Image, Animated,TouchableOpacity, StyleSheet, View, ScrollView,TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import InviteCard from './elements/InviteCard';
 import AddEvent from './elements/AddEvent';
@@ -7,6 +7,8 @@ import Event from './elements/Event';
 import Button from './Button'
 import firebaseConfig from './firebase'
 import firebase from 'firebase'
+import myEvents from './elements/MyEvents'
+import MyEvents from './elements/MyEvents';
 
 
 
@@ -46,12 +48,9 @@ class HomeScreen extends Component {
     
     this.animate()
     console.log("before",this.state.invitations)
-    //let index = this.state.invitations.indexOf(id)
-    //console.log("indexval:",index)
-    //this.state.invitations.splice(id-1,1)
+
     console.log("after",this.state.invitations)
     this.setState({invitations:this.state.invitations})
-      //console.log(this.state.invitations.length)
     console.log('deleted')
     console.log('new size',this.state.invitations.length)
   }
@@ -77,12 +76,9 @@ class HomeScreen extends Component {
       }
     }
     console.log("Before accepted",this.state.accepted)
-    //this.state.accepted.push(this.state.invitations[id-1])
     console.log("after accepted",this.state.accepted)
-    //this.state.invitations.splice(id-1,1)
     this.setState({accepted:this.state.accepted,invitations:this.state.invitations})
     
-    //console.log(this.state.invitations.length)
   }
 
 
@@ -116,6 +112,16 @@ class HomeScreen extends Component {
       {this.state.accepted.length !=0 ? this.state.accepted.map((v, i) => (
           <Event key={i} picture={v.Picture} name={v.Name} date={v.Date} />
         )) : <AddEvent navigation = {this.props.navigation}/>}
+         <TouchableHighlight style = {{justifyContent:'center'}}
+                    onPress = { () => {
+                        this.props.navigation.navigate('myEventsPage')
+                        
+                    }}>
+                    
+                    
+                    <Text style={{fontSize:15 , textAlign: 'center', color: 'blue'}}> My Events</Text>
+                    
+                    </TouchableHighlight>
       </ScrollView>
       </View>
     )
